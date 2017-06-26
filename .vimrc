@@ -1,5 +1,7 @@
 " sets up pathogen
 execute pathogen#infect()
+" enables plugins
+filetype plugin on
 " sets up syntax highlighting
 syntax enable
 " sets line numbers
@@ -14,11 +16,15 @@ if @% == 'Makefile'
     set noexpandtab
     set tabstop=4
 endif
-" enables plugins
-filetype plugin on
 " sets diff cursors for modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"  
 " sets ctrl-h to toggle line numbers  
 nnoremap <C-h> :set number! relativenumber! <CR>
+" makes statusline work
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
+set noshowmode
