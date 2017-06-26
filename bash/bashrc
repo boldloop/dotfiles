@@ -8,3 +8,11 @@ alias ll='ls -alF'
 function cs () {
     cd "$@" && ll
     }
+
+# makes 'cv' cd and vim
+function cv () {
+    cd $(dirname "$1") && vim $(basename "$1")
+    }
+
+# makes gc add and commit
+alias gc="git add -A && git commit -m"
