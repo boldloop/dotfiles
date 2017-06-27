@@ -22,5 +22,5 @@ function cv () {
 
 # makes gc add and commit and push and pull
 function gc () {
-    git add -A && git commit -m $1 && git push && git pull
+    git add -A && git commit -m "$@" && git push && git pull
     }
