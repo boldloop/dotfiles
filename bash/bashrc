@@ -2,10 +2,13 @@
 PS1="\n\[\e[1;35m\]\u\[\e[1;33m\] at \[\e[1;36m\]\h\[\e[1;33m\]:\[\e[1;33m\]\w\[\e[1;37m\]\n \[\e[1;33m\]$ \[\e[0;00m\]"
 
 # sets ll based on host
-case "$HOSTNAME" in
-    eleanor) alias ll="ls -alF" ;;
-    August-Brocchini) alias ll="ls -alF -G" ;;
-esac
+# case "$HOSTNAME" in
+#     eleanor) alias ll="ls -alF" ;;
+#     August-Brocchini) alias ll="ls -alF -G" ;;
+# esac
+
+# ll
+alias ll="ls -alFG"
 
 # makes 'cs' cd and ll
 function cs () {
