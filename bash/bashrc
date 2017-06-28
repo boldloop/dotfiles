@@ -20,7 +20,7 @@ function cv () {
     cd $(dirname "$1") && vim $(basename "$1")
     }
 
-# makes gc add and commit and push and pull
+# makes gc add and commit
 function gc () {
-    git add -A && git commit -m "$@" && git push && git pull
+    git add -A && git commit -m "$@"
     }
