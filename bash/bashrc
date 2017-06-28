@@ -4,6 +4,14 @@ PS1="\n\[\e[1;35m\]\u\[\e[1;33m\] at \[\e[1;36m\]\h\[\e[1;33m\]:\[\e[1;33m\]\w\[
 # ll
 alias ll="ls -alFG"
 
+# sets dot aliases
+alias ..=".."
+alias ...="../.."
+alias ....="../../.."
+alias .....="../../../.."
+alias ......="../../../../.."
+alias .......="../../../../../.."
+
 # makes 'cs' cd and ll
 function cs () {
     cd "$@" && ll
@@ -11,7 +19,14 @@ function cs () {
 
 # makes 'cv' cd and vim
 function cv () {
-    cd $(dirname "$1") && vim $(basename "$1")
+    mkdir -p $(dirname "$1") &&
+    cd $(dirname "$1") &&
+    if [ $(basename "$1") -eq no ]
+    then
+        :
+    else
+        vim $(basename "$1")
+    fi
     }
 
 # makes gc add and commit and push and pull
