@@ -1,0 +1,20 @@
+# personal PS1 prompt
+PS1="\n\[\e[1;35m\]\u\[\e[1;33m\] at \[\e[1;36m\]\h\[\e[1;33m\]:\[\e[1;33m\]\w\[\e[1;37m\]\n \[\e[1;33m\]$ \[\e[0;00m\]"
+
+# ll
+alias ll="ls -alFG"
+
+# makes 'cs' cd and ll
+function cs () {
+    cd "$@" && ll
+    }
+
+# makes 'cv' cd and vim
+function cv () {
+    cd $(dirname "$1") && vim $(basename "$1")
+    }
+
+# makes gc add and commit and push and pull
+function gc () {
+    git add -A && git commit -m "$@"
+    }
