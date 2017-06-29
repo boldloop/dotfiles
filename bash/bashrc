@@ -5,12 +5,12 @@ PS1="\n\[\e[1;35m\]\u\[\e[1;33m\] at \[\e[1;36m\]\h\[\e[1;33m\]:\[\e[1;33m\]\w\[
 alias ll="ls -alFG"
 
 # sets dot aliases
-alias ..=".."
-alias ...="../.."
-alias ....="../../.."
-alias .....="../../../.."
-alias ......="../../../../.."
-alias .......="../../../../../.."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
 
 # makes 'cs' cd and ll
 function cs () {
