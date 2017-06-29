@@ -29,8 +29,8 @@ function cv () {
     fi
     }
 
-# makes cd a 'smart' cd
-function cd () {
+# makes cc a 'smart' cd
+function cc () {
     if [ ${1: -1} == / ]
     then
     cs "$1"
