@@ -2,7 +2,7 @@
 PS1="\n\[\e[1;35m\]\u\[\e[1;33m\] at \[\e[1;36m\]\h\[\e[1;33m\]:\[\e[1;33m\]\w\[\e[1;37m\]\n \[\e[1;33m\]$ \[\e[0;00m\]"
 
 # ll
-alias ll="ls -alFG"
+alias ll="ls -AlFG"
 
 # sets dot aliases
 alias ..="cd .."
@@ -21,7 +21,7 @@ function cs () {
 function cv () {
     mkdir -p $(dirname "$1") &&
     cd $(dirname "$1") &&
-    if [ $(basename "$1") -eq no ]
+    if [ $(basename "$1") == no ]
     then
         :
     else
@@ -31,7 +31,7 @@ function cv () {
 
 # makes cc a 'smart' cd
 function cc () {
-    if [ "${str:$1: -1}" == / ]
+    if [[ "$1" == */ ]]
     then
     cs "$1"
     else
