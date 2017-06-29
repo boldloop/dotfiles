@@ -14,7 +14,7 @@ alias .......="cd ../../../../../.."
 
 # makes 'cs' cd and ll
 function cs () {
-    cd "$@" && ll
+    cd "$1" && ll
     }
 
 # makes 'cv' cd and vim
@@ -29,6 +29,18 @@ function cv () {
     fi
     }
 
+# makes cc, which is like a 'smart' cd
+function cc () {
+    if [ ${1: -1} == / ]
+    then
+    cs "$1"
+    else
+    cv "$1"
+    fi
+    }
+
+# makes gs git status
+alias gs="git status"
 # makes gc add and commit and push and pull
 function gc () {
     git add -A && git commit -m "$@"
