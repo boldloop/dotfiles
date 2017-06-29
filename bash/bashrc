@@ -31,7 +31,7 @@ function cv () {
 
 # makes cc a 'smart' cd
 function cc () {
-    if [ "${1: -1}" == / ]
+    if [ "${str:$1: -1}" == / ]
     then
     cs "$1"
     else
