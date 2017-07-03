@@ -5,29 +5,17 @@ PS1="\n\[\e[0;35m\]\u\[\e[0;33m\] at \[\e[0;36m\]\h\[\e[0;33m\]:\[\e[0;33m\]\w\[
 alias ll="ls -AlFG"
 
 # sets dot aliases
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-alias .......="cd ../../../../../.."
+alias ..="cv .."
+alias ...="cv ../.."
+alias ....="cv ../../.."
+alias .....="cv ../../../.."
+alias ......="cv ../../../../.."
+alias .......="cv ../../../../../.."
 
 # makes 'cs' cd and ll
 function cs () {
     cd "$1" && ll
     }
-
-# makes 'cv' cd and vim
-# function cv () {
-#     mkdir -p $(dirname "$1") &&
-#     cd $(dirname "$1") &&
-#     if [ $1 -eq "*/"]
-#     then
-#         ll "$1"
-#     else
-#         vim $(basename "$1")
-#     fi
-#     }
 
 # new cv
 function cv () {
