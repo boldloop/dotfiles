@@ -18,20 +18,48 @@ function cs () {
     }
 
 # makes 'cv' cd and vim
-function cv () {
-    mkdir -p $(dirname "$1") &&
-    cd $(dirname "$1") &&
-    if [ $(basename "$1") == no ]
-    then
-        :
-    else
-        vim $(basename "$1")
-    fi
-    }
+# function cv () {
+#     mkdir -p $(dirname "$1") &&
+#     cd $(dirname "$1") &&
+#     if [ $1 -eq "*/"]
+#     then
+#         ll "$1"
+#     else
+#         vim $(basename "$1")
+#     fi
+#     }
 
-# makes cc a 'smart' cd
+# new cv
+function cv () {
+    if [[ -a "$1" ]]
+    then
+        if [[ -d "$1" ]]
+        then
+            cd "$1" &&
+            ll
+        elif [[ -f "$1" ]]
+        then
+            cd $(dirname "$1") &&
+            vim $(basename "$1")
+        else
+            echo "neither a directory nor a file"
+        fi
+    else
+        if [[ "$1" == */ ]]
+        then
+            mkdir -p "$1" &&
+            cd "$1"
+        else
+            mkdir -p $(dirname "$1") &&
+            cd $(dirname "$1") &&
+            vim $(basename "$1")
+        fi
+    fi
+}
+
+# makes cc a smart cd
 function cc () {
-    if [[ "$1" == */ ]]
+    if [[ -d "$1" ]]
     then
     cs "$1"
     else
@@ -41,6 +69,7 @@ function cc () {
 
 # makes gs git status
 alias gs="git status"
+
 # makes gc add and commit and push and pull
 function gc () {
     git add -A && git commit -m "$@"
