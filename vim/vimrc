@@ -12,11 +12,13 @@ set number
 hi MatchParen cterm=bold ctermbg=none ctermfg=none
 
 " sets tabs to 4 spaces
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " makes indenting smart
 set smartindent
 
+" sets no autocomment
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " sets noexpandtab for Makefiles
 if &ft == 'make'
     set noexpandtab
@@ -41,6 +43,10 @@ let g:lightline = {
       \ }
 set noshowmode
 
+" makes syntastic behave
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 1
+
 " makes cmd-v paste correctly
-inoremap <D-V> <ESC> :set paste <CR> i <D-V> <ESC> :set nopaste <CR>
-nnoremap <D-V> <ESC> :set paste <CR> i <D-V> <ESC> :set nopaste <CR>
+nnoremap <D-V> <ESC> :set paste nosmartindent <CR> i <D-V> <ESC> :set nopaste nosmartindent <CR>
