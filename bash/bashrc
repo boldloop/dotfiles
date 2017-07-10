@@ -59,6 +59,4 @@ function cc () {
 alias gs="git status"
 
 # makes gc add and commit and push and pull
-function gc () {
-    git add -A && git commit -m "$@"
-    }
+alias gc="git commit -m"
