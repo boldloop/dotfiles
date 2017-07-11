@@ -60,11 +60,20 @@ function up () {
     if [[ -d "$1" ]]
     then
         cv "$1"
+    elif [[ -d "../$1" ]]
+    then
+        cv "$1"
+    elif [[ -d "../../$1" ]]
+    then
+        cv "$1"
     fi
 }
 
 # makes gs git status
 alias gs="git status"
 
-# makes gc add and commit and push and pull
+# makes gc
 alias gc="git commit -m"
+
+# makes gA add
+alias gA="git add -A"
