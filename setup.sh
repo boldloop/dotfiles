@@ -89,18 +89,19 @@ fi
 # }}}
 # symlinks {{{
 cd $HOME/.vim/
-if [[ -h snippets ]]
+rm snippets
+if [[ -h UltiSnips ]]
     then
-    if [[ $(readlink snippets) = ../git/dotfiles/vim/snippets ]]
+    if [[ $(readlink UltiSnips) = ../git/dotfiles/vim/UltiSnips ]]
     then
         :
     else
-        rm snippets
-        ln -s ../git/dotfiles/vim/snippets .
+        rm UltiSnips
+        ln -s ../git/dotfiles/vim/UltiSnips .
     fi
 else
-    rm snippets
-    ln -s ../git/dotfiles/vim/snippets .
+    rm UltiSnips
+    ln -s ../git/dotfiles/vim/UltiSnips .
 fi
 # }}}
 # vim: set foldmethod=marker foldlevel=0:
