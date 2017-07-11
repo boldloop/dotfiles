@@ -49,4 +49,4 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_open = 1
 
 " makes cmd-v paste correctly
-nnoremap <D-v> <ESC> :set paste nosmartindent <CR> i <D-v> <ESC> :set nopaste nosmartindent <CR>
+inoremap <D-v> <ESC>:set paste<CR>"*p<ESC>:set nopaste<CR>
