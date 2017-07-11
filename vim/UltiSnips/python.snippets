@@ -1,11 +1,11 @@
-snippet head
+snippet pyhead
 #!/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Authors:     $1
+# Authors:	 $1
 # Maintainers: $1
-# License:     20`! date +"%y"`, HRDAG, GPL v2 or later
-# ============================================
+# License:	 20`! date +"%y"`, HRDAG, GPL v2 or later
+# ===========================================
 # `! projpath.py $PWD``!p snip.rv = fn`
 
 import __main__ as main
@@ -16,15 +16,53 @@ import setup
 
 
 def get_setup():
-    scriptpath = main.__file__
-    args = {
-    }
-    return setup.do_setup(scriptpath, args)
+	scriptpath = main.__file__
+	args = {
+	}
+	return setup.do_setup(scriptpath, args)
 
 
 if __name__ == '__main__':
 
-    constants, logger = get_setup()   # include this line in every script
-    logger.setLevel(logging.INFO)        # adjust as preferred
-    logger.debug(constants)
+	constants, logger = get_setup()
+	logger.setLevel(logging.INFO)		# adjust as preferred
+	logger.debug(constants)
+endsnippet
+
+snippet parserhead
+#!/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Authors:     $1
+# Maintainers: $1
+# License:     20`! date +"%y"`, HRDAG, GPL v2 or later
+# ===========================================
+# `! projpath.py $PWD``!p snip.rv = fn`
+
+import __main__ as main
+import logging
+import argparse
+import numpy as np
+import pandas as pd
+import setup
+
+
+def get_setup():
+	scriptpath = main.__file__
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--inputfile', required=True)
+	cmdline = parser.parse_args()
+	outputfile = cmdline.inputfile.replace('input/', 'output/')
+	args = {
+		'fin': cmdline.inputfile,
+		'fout': outputfile,
+	}
+	return setup.do_setup(scriptpath, args)
+
+
+if __name__ == '__main__':
+
+	constants, logger = get_setup()
+	logger.setLevel(logging.INFO)		# adjust as preferred
+	logger.debug(constants)
 endsnippet
