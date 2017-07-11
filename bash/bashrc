@@ -55,6 +55,14 @@ function cc () {
     fi
     }
 
+# makes task
+function up () {
+    if [[ -d "$1" ]]
+    then
+        cv "$1"
+    fi
+}
+
 # makes gs git status
 alias gs="git status"
 
