@@ -1,6 +1,6 @@
 " Vi IMproved
 set nocompatible
-
+" Backspace set backspace=indent,eol,start 
 " sets up pathogen
 execute pathogen#infect()
 
@@ -47,6 +47,12 @@ set noshowmode
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_open = 1
+
+" Ultisnips
+let g:UltiSnipsUsePythonVersion = 3
+
+" YCM
+let g:ycm_server_python_interpreter = "/usr/bin/python2"
 
 " makes cmd-v paste correctly
 inoremap <D-v> <ESC>:set paste<CR>"*p<ESC>:set nopaste<CR>

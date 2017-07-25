@@ -1,5 +1,14 @@
+# set path
+PATH=$HOME/bin/vim/bin:$PATH
+
 # personal PS1 prompt
 PS1="\n\[\e[1;35m\]\u\[\e[0;33m\] at \[\e[1;36m\]\h\[\e[0;33m\]:\[\e[0;33m\]\w\[\e[0;37m\]\n \[\e[0;33m\]$ \[\e[0;00m\]"
+
+# alias vim
+if [[ -a $(which nvim) ]]
+    then
+    alias vim="nvim"
+fi
 
 # ll
 alias ll="ls -AlFG"
@@ -28,7 +37,7 @@ function cv () {
         elif [[ -f "$1" ]]
         then
             cd $(dirname "$1") &&
-            vim $(basename "$1")
+            nvim $(basename "$1")
         else
             echo "neither a directory nor a file"
         fi
@@ -40,7 +49,7 @@ function cv () {
         else
             mkdir -p $(dirname "$1") &&
             cd $(dirname "$1") &&
-            vim $(basename "$1")
+            nvim $(basename "$1")
         fi
     fi
 }
@@ -76,4 +85,4 @@ alias gs="git status"
 alias gc="git commit -m"
 
 # makes gA add
-alias gA="git add -A"
+alias gA="git add -A && git status"

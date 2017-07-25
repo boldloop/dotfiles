@@ -12,10 +12,13 @@
 rm -rf $HOME/.vim/bundle
 mkdir -p $HOME/.vim/bundle
 cd $HOME/.vim/bundle
-git clone https://github.com/itchyny/lightline.vim.git
-git clone https://github.com/ervandew/supertab.git
-git clone https://github.com/SirVer/ultisnips.git
-git clone https://github.com/vim-syntastic/syntastic.git
+echo "starting vim plugin clones"
+git clone -q https://github.com/Valloric/YouCompleteMe.git
+git clone -q https://github.com/itchyny/lightline.vim.git
+git clone -q https://github.com/ervandew/supertab.git
+git clone -q https://github.com/SirVer/ultisnips.git
+git clone -q https://github.com/vim-syntastic/syntastic.git
+echo "finished plugin clones"
 # }}}
 # local config checks {{{
 # bashrc {{{
