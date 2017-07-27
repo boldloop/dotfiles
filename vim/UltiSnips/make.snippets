@@ -1,3 +1,42 @@
+snippet m1
+# Authors:     $1
+# Maintainers: $1
+# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# ============================================
+# `! projpath.py $PWD``!p snip.rv = fn`
+
+.PHONY: all clean
+
+all: ${3:output/`!p
+try: 
+	snip.rv = os.listdir('../input/')[0]
+except FileNotFoundError:
+	pass`}
+
+clean:
+	rm output/*
+
+$3: \
+		`!p snip.rv = t[3].replace('output/', 'input/')` \
+		${2:`!p import operator
+dir = os.listdir('.')
+try:
+	dir.remove(fn)
+except ValueError:
+	pass
+nm_time = dict()
+for fi in dir:
+	fin = open(fi, 'r').read()
+	if '#!' in fin:
+		fstat = os.stat(fi)
+		ftime = fstat.st_mtime
+		nm_time[fi] = ftime
+script = max(nm_time.items(), key=operator.itemgetter(1))[0]
+fpath = os.getcwd().split('/')
+snip.rv = fpath[-1] + '/' + script`}
+	python3 $2 --inputfile=\$<
+endsnippet
+
 snippet m3
 # Authors:     $1
 # Maintainers: $1
@@ -37,13 +76,13 @@ except ValueError:
 nm_time = dict()
 for fi in dir:
 	fin = open(fi, 'r').read()
-	if '#!/bin/env' in fin or '#!/usr/bin/env' in fin:
+	if '#!' in fin:
 		fstat = os.stat(fi)
 		ftime = fstat.st_mtime
 		nm_time[fi] = ftime
 script = max(nm_time.items(), key=operator.itemgetter(1))[0]
 fpath = os.getcwd().split('/')
-snip.rv = fpath[-1] + '/' + script`
+snip.rv = fpath[-1] + '/' + script`}
 	python3 $2 --inputfile=\$<
 
 $4: \

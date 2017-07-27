@@ -1,6 +1,9 @@
 " Vi IMproved
 set nocompatible
-" Backspace set backspace=indent,eol,start 
+
+" Backspace 
+set backspace=indent,eol,start 
+
 " sets up pathogen
 execute pathogen#infect()
 
@@ -36,6 +39,9 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " sets ctrl-h to toggle line numbers
 nnoremap <C-h> :set number! relativenumber! <CR>
 
+" makes ctrl-l clear search highlighting
+nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
+
 " makes lightline work
 set laststatus=2
 let g:lightline = {
@@ -50,9 +56,13 @@ let g:syntastic_check_on_open = 1
 
 " Ultisnips
 let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 " YCM
 let g:ycm_server_python_interpreter = "/usr/bin/python2"
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " makes cmd-v paste correctly
 inoremap <D-v> <ESC>:set paste<CR>"*p<ESC>:set nopaste<CR>
