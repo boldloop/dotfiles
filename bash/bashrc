@@ -86,3 +86,6 @@ alias gc="git commit -m"
 
 # makes gA add
 alias gA="git add -A && git status"
+
+# pull pulls
+alias pull="git pull && snap pull"
