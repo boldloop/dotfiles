@@ -19,7 +19,7 @@ git clone -q https://github.com/SirVer/ultisnips.git
 git clone -q https://github.com/vim-syntastic/syntastic.git
 git clone -q https://github.com/Valloric/YouCompleteMe.git
 cd YouCompleteMe
-git submodule update --init --recursive
+git submodule update -q --init --recursive
 cd $HOME
 if [[ ! -d "ycm_build" ]]
     then
@@ -28,7 +28,9 @@ if [[ ! -d "ycm_build" ]]
     rm *
     cmake -G "Unix Makefiles" . \
                         ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-    echo "finished plugin clones"
+    make
+fi
+echo "finished plugin clones"
 # }}}
 # local config checks {{{
 # bashrc {{{
@@ -102,7 +104,11 @@ fi
 # }}}
 # symlinks {{{
 cd $HOME/.vim/
-rm snippets
+if [[ -a snippets ]]
+    then
+    rm snippets
+fi
+
 if [[ -h UltiSnips ]]
     then
     if [[ $(readlink UltiSnips) = ../git/dotfiles/vim/UltiSnips ]]
@@ -115,6 +121,24 @@ if [[ -h UltiSnips ]]
 else
     rm UltiSnips
     ln -s ../git/dotfiles/vim/UltiSnips .
+fi
+
+mkdir -p after
+
+cd after
+
+if [[ -h ftplugin ]]
+    then
+    if [[ $(readlink ftplugin) = ../../git/dotfiles/vim/ftplugin ]]
+    then
+        :
+    else
+        rm ftplugin
+        ln -s ../../git/dotfiles/vim/ftplugin .
+    fi
+else
+    rm -r ftplugin
+    ln -s ../../git/dotfiles/vim/ftplugin .
 fi
 # }}}
 # vim: set foldmethod=marker foldlevel=0:

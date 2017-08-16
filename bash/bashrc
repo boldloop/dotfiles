@@ -1,5 +1,6 @@
 # set path
-PATH=$HOME/bin/vim/bin:$PATH
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # personal PS1 prompt
 PS1="\n\[\e[1;35m\]\u\[\e[0;33m\] at \[\e[1;36m\]\h\[\e[0;33m\]:\[\e[0;33m\]\w\[\e[0;37m\]\n \[\e[0;33m\]$ \[\e[0;00m\]"
@@ -11,7 +12,7 @@ if [[ -a $(which nvim) ]]
 fi
 
 # ll
-alias ll="ls -AlFG"
+alias ll="ls -AlFGgh --color='always'"
 
 # sets dot aliases
 alias ..="cv .."
