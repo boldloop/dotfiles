@@ -7,7 +7,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'w0rp/ale'
-Plugin 'tpope/vim-commentary'
 Plugin 'itchyny/lightline.vim'
 call vundle#end()
 filetype plugin indent on
@@ -19,7 +18,10 @@ function CodePlugs()
     filetype off
     call vundle#begin()
     Plugin 'Valloric/YouCompleteMe'
-    Plugin 'vim-syntastic/syntastic'
+    Plugin 'tpope/vim-commentary'
+    call vundle#end()
+    filetype plugin indent on
 endfunction
-autocmd BufWritePre * if index(ftToIgnore, &ft) < 0 | call CodePlugs()
+autocmd BufWritePre * if index(g:text_files, &ft) < 0 | call CodePlugs()
 " }}}
+" vim: set foldmethod=marker
