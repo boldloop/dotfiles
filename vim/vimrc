@@ -1,7 +1,10 @@
 " Vi IMproved
 set nocompatible
 
-" Backspace 
+" plugins
+source ~/git/dotfiles/vim/plugs.vim
+
+" Backspace
 set backspace=indent,eol,start 
 
 " sets up pathogen
@@ -36,6 +39,9 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
+" persistent undo
+set undofile
+
 " sets ctrl-h to toggle line numbers
 nnoremap <C-h> :set number! relativenumber! <CR>
 
@@ -49,10 +55,10 @@ let g:lightline = {
       \ }
 set noshowmode
 
-" makes syntastic behave
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_check_on_wq = 0
-let g:syntastic_check_on_open = 1
+" ale
+let g:ale_linters = {
+\    'python': ['flake8']
+\}
 
 " Ultisnips
 let g:UltiSnipsUsePythonVersion = 3
@@ -63,6 +69,14 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 " YCM
 let g:ycm_server_python_interpreter = systemlist("which python2.7")[0]
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_filepath_completion_use_working_dir = 1
 
 " makes cmd-v paste correctly
 inoremap <D-v> <ESC>:set paste<CR>"*p<ESC>:set nopaste<CR>
+
+" styles folding correctly
+hi Folded cterm=bold
+hi Folded ctermfg=DarkCyan
+hi Folded ctermbg=LightGrey
+
+" done.

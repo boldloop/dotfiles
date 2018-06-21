@@ -17,7 +17,6 @@ clean:
 	rm output/*
 
 $3: \
-		`!p snip.rv = t[3].replace('output/', 'input/')` \
 		${2:`!p import operator
 dir = os.listdir('.')
 try:
@@ -33,8 +32,64 @@ for fi in dir:
 		nm_time[fi] = ftime
 script = max(nm_time.items(), key=operator.itemgetter(1))[0]
 fpath = os.getcwd().split('/')
-snip.rv = fpath[-1] + '/' + script`}
-	python3 $2 --inputfile=\$<
+snip.rv = fpath[-1] + '/' + script`} \
+		`!p snip.rv = t[3].replace('output/', 'input/')`
+	python3 \$< --inputfile=`!p snip.rv = t[3].replace('output/', 'input/')`
+
+
+# done.
+endsnippet
+
+snippet m2
+# Authors:     $1
+# Maintainers: $1
+# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# ============================================
+# `! projpath.py $PWD``!p snip.rv = fn`
+
+.PHONY: all clean
+
+all: ${3:output/`!p
+try: 
+	snip.rv = os.listdir('../input/')[0]
+except FileNotFoundError:
+	pass`} \
+		${4:output/`!p
+try: 
+	snip.rv = os.listdir('../input/')[1]
+except FileNotFoundError:
+	pass`}
+
+clean:
+	rm output/*
+
+$3: \
+		${2:`!p import operator
+dir = os.listdir('.')
+try:
+	dir.remove(fn)
+except ValueError:
+	pass
+nm_time = dict()
+for fi in dir:
+	fin = open(fi, 'r').read()
+	if '#!' in fin:
+		fstat = os.stat(fi)
+		ftime = fstat.st_mtime
+		nm_time[fi] = ftime
+script = max(nm_time.items(), key=operator.itemgetter(1))[0]
+fpath = os.getcwd().split('/')
+snip.rv = fpath[-1] + '/' + script`} \
+		`!p snip.rv = t[3].replace('output/', 'input/')`
+	python3 \$< --inputfile=`!p snip.rv = t[3].replace('output/', 'input/')`
+
+$4: \
+		$2 \
+		`!p snip.rv = t[4].replace('output/', 'input/')`
+	python3 \$< --inputfile=`!p snip.rv = t[4].replace('output/', 'input/')`
+
+
+# done.
 endsnippet
 
 snippet m3
@@ -66,7 +121,6 @@ clean:
 	rm output/*
 
 $3: \
-		`!p snip.rv = t[3].replace('output/', 'input/')` \
 		${2:`!p import operator
 dir = os.listdir('.')
 try:
@@ -82,16 +136,19 @@ for fi in dir:
 		nm_time[fi] = ftime
 script = max(nm_time.items(), key=operator.itemgetter(1))[0]
 fpath = os.getcwd().split('/')
-snip.rv = fpath[-1] + '/' + script`}
-	python3 $2 --inputfile=\$<
+snip.rv = fpath[-1] + '/' + script`} \
+		`!p snip.rv = t[3].replace('output/', 'input/')`
+	python3 \$< --inputfile=`!p snip.rv = t[3].replace('output/', 'input/')`
 
 $4: \
-		`!p snip.rv = t[4].replace('output/', 'input/')` \
-		$2
-	python3 $2 --inputfile=\$<
+		$2 \
+		`!p snip.rv = t[4].replace('output/', 'input/')`
+	python3 \$< --inputfile=`!p snip.rv = t[4].replace('output/', 'input/')`
 
 $5: \
-		`!p snip.rv = t[5].replace('output/', 'input/')` \
-		$2
-	python3 $2 --inputfile=\$<
+		$2 \
+		`!p snip.rv = t[5].replace('output/', 'input/')`
+	python3 \$< --inputfile=`!p snip.rv = t[5].replace('output/', 'input/')`
+
+# done.
 endsnippet

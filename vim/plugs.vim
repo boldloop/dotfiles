@@ -1,27 +1,21 @@
 " File for organizing plugins
-let text_files = ['markdown', 'text']
-" Generic {{{
+" Vim-plug {{{
 filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'w0rp/ale'
-Plugin 'itchyny/lightline.vim'
-call vundle#end()
+call plug#begin("~/.vim/plugged")
+Plug 'SirVer/ultisnips'
+Plug 'w0rp/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-commentary'
+Plug 'justinmk/vim-sneak'
+Plug 'ervandew/supertab'
+call plug#end()
 filetype plugin indent on
 " }}}
-" Text {{{
+" Config {{{
+let g:sneak#label = 1
+let g:sneak#streak = 1
+nnoremap s <Plug>SneakLabel_s
+nnoremap S <Plug>SneakLabel_s
 " }}}
-" Code {{{
-function CodePlugs()
-    filetype off
-    call vundle#begin()
-    Plugin 'Valloric/YouCompleteMe'
-    Plugin 'tpope/vim-commentary'
-    call vundle#end()
-    filetype plugin indent on
-endfunction
-autocmd BufWritePre * if index(g:text_files, &ft) < 0 | call CodePlugs()
-" }}}
-" vim: set foldmethod=marker
+" vim: foldmethod=marker

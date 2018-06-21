@@ -1,37 +1,3 @@
-snippet pyhead
-#!/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# Authors:     $1
-# Maintainers: $1
-# License:	   20`! date +"%y"`, HRDAG, GPL v2 or later
-# ===========================================
-# `! projpath.py $PWD``!p snip.rv = fn`
-
-import __main__ as main
-import logging
-import pandas as pd
-import setup
-
-
-def get_setup():
-	scriptpath = main.__file__
-	args = {
-		'fin': cmdline.inputfile,
-		'fout': outputfile,
-	}
-	return setup.do_setup(scriptpath, args)
-
-
-if __name__ == '__main__':
-
-	constants, logger = get_setup()
-	logger.setLevel(logging.INFO)		# adjust as preferred
-	logger.debug(constants)
-
-	${2:`!p snip.rv = os.path.split(os.getcwd())[-3]`} 
-endsnippet
-
 snippet parserhead
 #!/bin/env python3
 # -*- coding: utf-8 -*-
@@ -48,10 +14,13 @@ import argparse
 import pandas as pd
 import setup
 `!p
-if '.yaml ' in ' '.join(os.listdir('../hand/')) or ' '.join(os.listdir('../hand/')).endswith('.yaml'):
-	snip.rv = 'import yaml\n'
-else:
-	snip.rv = '\n'`
+try:
+	if '.yaml ' in ' '.join(os.listdir('../hand/')) or ' '.join(os.listdir('../hand/')).endswith('.yaml'):
+		snip.rv = 'import yaml\n'
+	else:
+		snip.rv = '\n'
+except FileNotFoundError:
+	pass`
 
 def get_setup():
 	scriptpath = main.__file__
@@ -65,7 +34,7 @@ def get_setup():
 try:
 	dir_l = os.listdir('../hand')
 except FileNotFoundError:
-	pass
+	dir_l = []
 snip.rv = ''
 for f in dir_l:
 	file_base = os.path.splitext(f)[0]
@@ -80,17 +49,32 @@ if __name__ == '__main__':
 	logger.setLevel(logging.INFO)		# adjust as preferred
 	logger.debug(constants)
 
-	${2:`!p snip.rv = os.getcwd().split('/')[-3]`} = pd.read_csv(constants.fin, sep='|')
-	logger.info('{} recs read from {}'.format(len($2), constants.fin))`!p snip.rv = ''
-for f in os.listdir('../hand/'):
-	if f.endswith('.yaml'):
-		name = os.path.splitext(f)[0]
-		snip.rv += '\n    ' + name + ' = yaml.load(open(constants.'
-		snip.rv += name + '))[\'' + name + '\']'`		
+	${2:`!p snip.rv = os.getcwd().split('/')[-3].lower()`} = pd.read_csv(constants.fin, sep='|')
+	logger.info(f'{len($2)} recs read from {constants.fin}')`!p snip.rv = ''
+try:
+	for f in os.listdir('../hand/'):
+		if f.endswith('.yaml'):
+			name = os.path.splitext(f)[0]
+			snip.rv += '\n    ' + name + ' = yaml.load(open(constants.'
+			snip.rv += name + "))[\'" + name + "\']"
+except FileNotFoundError:
+	pass`
 
 	$2.to_csv(constants.fout, **constants.csv_opts)
-	logger.info('{} recs written to {}'.format(len($2), constants.fout)
-	
+	logger.info(f'{len($2)} recs written to {constants.fout}')
+
+# done.
+endsnippet
+
+snippet head
+#!/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Authors:     $1
+# Maintainers: $1
+# License:     20`! date +"%y"`, HRDAG, GPL v2 or later
+# ===========================================
+# `! projpath.py $PWD``!p snip.rv = fn`
 endsnippet
 
 snippet yamlload

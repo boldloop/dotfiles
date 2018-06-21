@@ -26,6 +26,9 @@ alias .....="cv ../../../.."
 alias ......="cv ../../../../.."
 alias .......="cv ../../../../../.."
 
+# cleans then runs
+alias rcr="run clean && run"
+
 # makes 'cs' cd and ll
 function cs () {
     cd "$1" && ll
@@ -93,4 +96,24 @@ alias gc="git commit -m"
 alias gA="git add -A && git status"
 
 # pull pulls
-alias pull="git pull && snap pull"
+function pull () {
+    if [[ -d $(python3 $HOME/bin/toproj.py $(pwd))/.snap ]]
+    then
+        git pull
+    else
+        git pull && snap pull
+    fi
+}
+
+# makes makehash make assign-hashids dir
+function makehash {
+    mkdir assign-hashids && cd assign-hashids
+    mkdir src input output
+    cd input
+    ln -s ../../import/output/*.csv.gz
+    cd ../src
+    ln -s ../../../share/setup.py .
+    ln -s ../../../share/assign-hashids.py .
+    vim Makefile
+    run
+}
