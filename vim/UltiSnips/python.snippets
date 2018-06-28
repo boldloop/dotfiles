@@ -1,3 +1,4 @@
+# parserhead {{{
 snippet parserhead
 #!/bin/env python3
 # -*- coding: utf-8 -*-
@@ -65,7 +66,9 @@ except FileNotFoundError:
 
 # done.
 endsnippet
+# }}}
 
+# head {{{
 snippet head
 #!/bin/env python3
 # -*- coding: utf-8 -*-
@@ -76,7 +79,12 @@ snippet head
 # ===========================================
 # `! projpath.py $PWD``!p snip.rv = fn`
 endsnippet
+# }}}
 
+# yamlload {{{
 snippet yamlload
 $1 = yaml.load(open(constants.$2))[$3]
 endsnippet
+# }}}
+
+# vim: foldmethod=marker

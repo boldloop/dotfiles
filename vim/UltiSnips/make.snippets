@@ -1,3 +1,4 @@
+# m1 {{{
 snippet m1
 # Authors:     $1
 # Maintainers: $1
@@ -36,10 +37,11 @@ snip.rv = fpath[-1] + '/' + script`} \
 		`!p snip.rv = t[3].replace('output/', 'input/')`
 	python3 \$< --inputfile=`!p snip.rv = t[3].replace('output/', 'input/')`
 
-
 # done.
 endsnippet
+# }}}
 
+# m2 {{{
 snippet m2
 # Authors:     $1
 # Maintainers: $1
@@ -91,7 +93,9 @@ $4: \
 
 # done.
 endsnippet
+# }}}
 
+# m3 {{{
 snippet m3
 # Authors:     $1
 # Maintainers: $1
@@ -152,3 +156,70 @@ $5: \
 
 # done.
 endsnippet
+# }}}
+
+# pass1 {{{
+snippet pass1
+# Authors:     $1
+# Maintainers: $1
+# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# ============================================
+# `! projpath.py $PWD``!p snip.rv = fn`
+
+.PHONY: all clean
+
+all: ${3:output/`!p
+try: 
+	snip.rv = os.listdir('../input/')[0]
+except FileNotFoundError:
+	pass`}
+
+clean:
+	rm output/*
+
+$3: \
+		`!p snip.rv = t[3].replace('output/', 'input/')`
+	ln -sf ../\$< \$@
+
+# done.
+endsnippet
+# }}}
+
+# pass2 {{{
+snippet pass2
+# Authors:     $1
+# Maintainers: $1
+# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# ============================================
+# `! projpath.py $PWD``!p snip.rv = fn`
+
+.PHONY: all clean
+
+all: ${3:output/`!p
+try: 
+	snip.rv = os.listdir('../input/')[0]
+except FileNotFoundError:
+	pass`} \
+		${4:output/`!p
+try: 
+	snip.rv = os.listdir('../input/')[1]
+except FileNotFoundError:
+	pass`}
+
+clean:
+	rm output/*
+
+$3: \
+		`!p snip.rv = t[3].replace('output/', 'input/')`
+	ln -sf ../\$< \$@
+
+$4: \
+		`!p snip.rv = t[4].replace('output/', 'input/')`
+	ln -sf ../\$< \$@
+
+# done.
+endsnippet
+# }}}
+
+# vim: foldmethod=marker
+# done.

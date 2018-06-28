@@ -7,9 +7,6 @@ source ~/git/dotfiles/vim/plugs.vim
 " Backspace
 set backspace=indent,eol,start 
 
-" sets up pathogen
-execute pathogen#infect()
-
 " sets up syntax highlighting
 syntax enable
 
@@ -43,7 +40,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set undofile
 
 " sets ctrl-h to toggle line numbers
-nnoremap <C-h> :set number! relativenumber! <CR>
+nnoremap <silent> <C-h> :set number! relativenumber! <CR>
 
 " makes ctrl-l clear search highlighting
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
@@ -72,7 +69,10 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filepath_completion_use_working_dir = 1
 
 " makes cmd-v paste correctly
-inoremap <D-v> <ESC>:set paste<CR>"*p<ESC>:set nopaste<CR>
+inoremap <silent> <D-v> <ESC>:set paste<CR>"*p<ESC>:set nopaste<CR>
+
+" delete trailing whitespace on normal mode
+inoremap <silent> <Esc> <Esc>:%s/\s\+$//e<CR>
 
 " styles folding correctly
 hi Folded cterm=bold

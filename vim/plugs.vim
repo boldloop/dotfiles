@@ -3,12 +3,14 @@
 filetype off
 call plug#begin("~/.vim/plugged")
 Plug 'SirVer/ultisnips'
+Plug 'roxma/nvim-completion-manager'
 Plug 'w0rp/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-sneak'
 Plug 'ervandew/supertab'
+Plug 'kien/rainbow_parentheses.vim'
 call plug#end()
 filetype plugin indent on
 " }}}
