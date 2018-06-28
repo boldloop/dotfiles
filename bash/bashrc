@@ -123,4 +123,8 @@ function task () {
 
 alias featherhead="featherhead.py"
 
+function zhead () {
+    zcat $1 | head
+}
+
 # done.
