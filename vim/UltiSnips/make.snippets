@@ -1,3 +1,29 @@
+# globals {{{
+global !p
+def get_script():
+	import operator
+	dir = os.listdir('.')
+	try:
+		dir.remove(fn)
+	except ValueError:
+		pass
+	nm_time = dict()
+	for fi in dir:
+		try:
+			fin = open(fi, 'r').read()
+			if '#!' in fin:
+				fstat = os.stat(fi)
+				ftime = fstat.st_mtime
+				nm_time[fi] = ftime
+		except:
+			pass
+	script = max(nm_time.items(), key=operator.itemgetter(1))[0]
+	return script
+
+inputs = os.listdir('../input/')
+endglobal
+# }}}
+
 # m1 {{{
 snippet m1
 # Authors:     $1
@@ -8,37 +34,15 @@ snippet m1
 
 .PHONY: all clean
 
-all: ${3:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[0]
-except FileNotFoundError:
-	pass`}
+all: output/${3:`!p snip.rv = inputs[0]`}
 
 clean:
 	-rm output/*
 
-$3: \
-		${2:`!p import operator
-dir = os.listdir('.')
-try:
-	dir.remove(fn)
-except ValueError:
-	pass
-nm_time = dict()
-for fi in dir:
-	try:
-		fin = open(fi, 'r').read()
-		if '#!' in fin:
-			fstat = os.stat(fi)
-			ftime = fstat.st_mtime
-			nm_time[fi] = ftime
-	except:
-		pass
-script = max(nm_time.items(), key=operator.itemgetter(1))[0]
-fpath = os.getcwd().split('/')
-snip.rv = fpath[-1] + '/' + script`} \
-		`!p snip.rv = t[3].replace('output/', 'input/')`
-	python3 \$< --inputfile=`!p snip.rv = t[3].replace('output/', 'input/')`
+output/$3: \
+		src/${2:`!p snip.rv = get_script()`} \
+		input/`!p snip.rv = inputs[0]`
+	python3 \$< --inputfile=`!p snip.rv = inputs[0]`
 
 # done.
 endsnippet
@@ -48,43 +52,20 @@ endsnippet
 snippet m2
 # Authors:     $1
 # Maintainers: $1
-# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# License: 	   `! date +'%Y'`, HRDAG, GPL v2 or later
 # ============================================
 # `! projpath.py $PWD``!p snip.rv = fn`
 
 .PHONY: all clean
 
-all: ${3:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[0]
-except FileNotFoundError:
-	pass`} \
-		${4:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[1]
-except FileNotFoundError:
-	pass`}
+all: output/${3:`!p snip.rv = inputs[0]`} \
+		output/${4:`!p snip.rv = inputs[1]`}
 
 clean:
 	-rm output/*
 
 $3: \
-		${2:`!p import operator
-dir = os.listdir('.')
-try:
-	dir.remove(fn)
-except ValueError:
-	pass
-nm_time = dict()
-for fi in dir:
-	fin = open(fi, 'r').read()
-	if '#!' in fin:
-		fstat = os.stat(fi)
-		ftime = fstat.st_mtime
-		nm_time[fi] = ftime
-script = max(nm_time.items(), key=operator.itemgetter(1))[0]
-fpath = os.getcwd().split('/')
-snip.rv = fpath[-1] + '/' + script`} \
+		src/${2:`!p snip.rv = get_script()`} \
 		`!p snip.rv = t[3].replace('output/', 'input/')`
 	python3 \$< --inputfile=`!p snip.rv = t[3].replace('output/', 'input/')`
 
@@ -102,60 +83,33 @@ endsnippet
 snippet m3
 # Authors:     $1
 # Maintainers: $1
-# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# License: 	   `! date +'%Y'`, HRDAG, GPL v2 or later
 # ============================================
 # `! projpath.py $PWD``!p snip.rv = fn`
 
 .PHONY: all clean
 
-all: ${3:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[0]
-except FileNotFoundError:
-	pass`} \
-		${4:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[1]
-except FileNotFoundError:
-	pass`} \
-		${5:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[2]
-except FileNotFoundError:
-	pass`}
+all: output/${3:`!p snip.rv = inputs[0]`} \
+		output/${4:`!p snip.rv = inputs[1]`}
+		output/${5:`!p snip.rv = inputs[2]`}
 
 clean:
 	-rm output/*
 
 $3: \
-		${2:`!p import operator
-dir = os.listdir('.')
-try:
-	dir.remove(fn)
-except ValueError:
-	pass
-nm_time = dict()
-for fi in dir:
-	fin = open(fi, 'r').read()
-	if '#!' in fin:
-		fstat = os.stat(fi)
-		ftime = fstat.st_mtime
-		nm_time[fi] = ftime
-script = max(nm_time.items(), key=operator.itemgetter(1))[0]
-fpath = os.getcwd().split('/')
-snip.rv = fpath[-1] + '/' + script`} \
-		`!p snip.rv = t[3].replace('output/', 'input/')`
-	python3 \$< --inputfile=`!p snip.rv = t[3].replace('output/', 'input/')`
+		src/${2:`!p snip.rv = get_script()`} \
+		`!p snip.rv = inputs[0]`
+	python3 \$< --inputfile=`!p snip.rv = inputs[0]`
 
 $4: \
 		$2 \
-		`!p snip.rv = t[4].replace('output/', 'input/')`
-	python3 \$< --inputfile=`!p snip.rv = t[4].replace('output/', 'input/')`
+		`!p snip.rv = inputs[1]`
+	python3 \$< --inputfile=`!p snip.rv = inputs[1]`
 
 $5: \
 		$2 \
-		`!p snip.rv = t[5].replace('output/', 'input/')`
-	python3 \$< --inputfile=`!p snip.rv = t[5].replace('output/', 'input/')`
+		`!p snip.rv = inputs[2]`
+	python3 \$< --inputfile=`!p snip.rv = inputs[2]`
 
 # done.
 endsnippet
@@ -165,23 +119,19 @@ endsnippet
 snippet pass1
 # Authors:     $1
 # Maintainers: $1
-# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# License: 	   `! date +'%Y'`, HRDAG, GPL v2 or later
 # ============================================
 # `! projpath.py $PWD``!p snip.rv = fn`
 
 .PHONY: all clean
 
-all: ${3:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[0]
-except FileNotFoundError:
-	pass`}
+all: output/${3:`!p snip.rv = inputs[0]`}
 
 clean:
 	-rm output/*
 
-$3: \
-		`!p snip.rv = t[3].replace('output/', 'input/')`
+output/$3: \
+		input/`!p snip.rv = inputs[0]`
 	ln -sf ../\$< \$@
 
 # done.
@@ -192,32 +142,24 @@ endsnippet
 snippet pass2
 # Authors:     $1
 # Maintainers: $1
-# License: 	   20`! date +'%y'`, HRDAG, GPL v2 or later
+# License: 	   `! date +'%Y'`, HRDAG, GPL v2 or later
 # ============================================
 # `! projpath.py $PWD``!p snip.rv = fn`
 
 .PHONY: all clean
 
-all: ${3:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[0]
-except FileNotFoundError:
-	pass`} \
-		${4:output/`!p
-try:
-	snip.rv = os.listdir('../input/')[1]
-except FileNotFoundError:
-	pass`}
+all: output/${3:`!p snip.rv = inputs[0]`} \
+		output/${4:`!p snip.rv = inputs[1]`}
 
 clean:
 	-rm output/*
 
-$3: \
-		`!p snip.rv = t[3].replace('output/', 'input/')`
+output/$3: \
+		input/`!p snip.rv = inputs[0]`
 	ln -sf ../\$< \$@
 
-$4: \
-		`!p snip.rv = t[4].replace('output/', 'input/')`
+output/$4: \
+		input/`!p snip.rv = inputs[1]`
 	ln -sf ../\$< \$@
 
 # done.
