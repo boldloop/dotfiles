@@ -42,7 +42,7 @@ clean:
 output/$3: \
 		src/${2:`!p snip.rv = get_script()`} \
 		input/`!p snip.rv = inputs[0]`
-	python3 \$< --inputfile=`!p snip.rv = inputs[0]`
+	python3 \$< --inputfile=input/`!p snip.rv = inputs[0]`
 
 # done.
 endsnippet

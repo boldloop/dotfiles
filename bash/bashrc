@@ -114,11 +114,35 @@ function makehash {
     run
 }
 
+# inits tasks TODO: add dynamic input symlinking
 function task () {
     mkdir $1 && cd $1
     mkdir src input output
-    cd src && ln -s ../../../../share/setup.py .
+    cd src
+    setup_dir=$(dirname $(find $(git rev-parse --show-toplevel) \
+        -name setup.py | grep share))
+    setup_dir=$(realpath --relative-to=. $setup_dir)
+    ln -s $setup_dir/setup.py .
+
+    # symlink inputs--currently from a menu
     cd ../input/
+    touch "../../QUIT"
+    PS3="Which task's outputs are this task's inputs? "
+    select prev_task in ../../*;
+    do
+        case $prev_task in
+        "../../QUIT")
+            echo "Fine, pick your own inputs"
+            break
+            ;;
+        *)
+            ln -s $prev_task/output/* .
+            break
+            ;;
+        esac
+    done
+    rm "../../QUIT"
+    rm *.log *.yaml
 }
 
 alias featherhead="featherhead.py"
