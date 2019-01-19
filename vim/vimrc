@@ -4,8 +4,11 @@ set nocompatible
 " plugins
 source ~/git/dotfiles/vim/plugs.vim
 
+" makes highlighting work
+source ~/git/dotfiles/vim/hi-presets.vim
+
 " Backspace
-set backspace=indent,eol,start 
+set backspace=indent,eol,start
 
 " sets up syntax highlighting
 syntax enable

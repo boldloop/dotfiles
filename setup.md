@@ -1,0 +1,21 @@
+- install karabiner
+- install anaconda
+- install brew (if macos)
+- install gnu coreutils
+- install neovim
+- install python3 for neovim
+- install pluginstaller thingy
+- install vim keybindings for jupyter
+- symlink bashrc and vimrc
+- reference vimrc + .vim/ in init.vim
+- generate new ssh key
+- create .ssh/config
+- add new key to github
+- add new key to eleanor
+- set -o vi
+- install snap
+- install aer-services
+- install run
+- symlink projpath.py(s)
+- install fluid
+- setup ssb's: Toggl, Gcal
