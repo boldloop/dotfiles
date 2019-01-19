@@ -3,7 +3,7 @@
 #
 # Authors:     GB
 # Maintainers: GB
-# License:     2018, HRDAG, GPL v2 or later
+# License:     2018, Gus Brocchini, GPL v2 or later
 # ===========================================
 # featherhead.py
 
