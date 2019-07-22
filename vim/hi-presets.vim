@@ -45,7 +45,7 @@ hi MatchParen cterm=bold ctermbg=248 guibg=Cyan
 hi Comment ctermfg=4 guifg=Blue
 hi Constant ctermfg=1 guifg=Magenta
 hi Special ctermfg=5 guifg=SlateBlue
-hi Identifier ctermfg=6 guifg=DarkCyan
+hi Identifier ctermfg=6 guifg=DarkCyan term=NONE cterm=NONE gui=NONE
 hi Statement ctermfg=130 gui=bold guifg=Brown
 hi PreProc ctermfg=5 guifg=Purple
 hi Type ctermfg=2 gui=bold guifg=SeaGreen

@@ -48,34 +48,8 @@ nnoremap <silent> <C-h> :set number! relativenumber! <CR>
 " makes ctrl-l clear search highlighting
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
 
-" makes lightline work
-set laststatus=2
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
-set noshowmode
-
-" ale
-let g:ale_linters = {
-\    'python': ['flake8']
-\}
-
-" Ultisnips
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
-" YCM
-let g:ycm_server_python_interpreter = systemlist("which python2.7")[0]
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_filepath_completion_use_working_dir = 1
-
 " makes cmd-v paste correctly
 inoremap <silent> <D-v> <ESC>:set paste<CR>"*p<ESC>:set nopaste<CR>
-
-" delete trailing whitespace on normal mode
-inoremap <silent> <Esc> <Esc>:%s/\s\+$//e<CR>
 
 " styles folding correctly
 hi Folded cterm=bold
