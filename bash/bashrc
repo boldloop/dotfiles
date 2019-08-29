@@ -26,6 +26,9 @@ alias .....="cv ../../../.."
 alias ......="cv ../../../../.."
 alias .......="cv ../../../../../.."
 
+# aerl-services
+alias aerl-services="aer-services -s aerl"
+
 # cleans then runs
 alias rcr="run clean && run"
 
