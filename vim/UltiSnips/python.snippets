@@ -95,7 +95,45 @@ snippet schoolhead
 # File: `!p snip.rv = fn`
 # Written by: Gus Brocchini
 # Date: `! date +"%d %b %Y"`
-# $0
+# $1
+
+from graphics import GraphWin, Point, $2
+
+
+def main():
+	window = GraphWin($3)
+	$0
+
+	pt = window.getMouse()`!p try:
+	with open('specs/' + fn.replace('.py', ''), 'r') as f:
+		event_loop_lines = f.readlines()
+	snip.rv = '\n' + ''.join(["    # " + line for line in event_loop_lines])
+except FileNotFoundError:
+	pass`
+	window.close()
+
+
+main()
+
+# done.
+endsnippet
+# }}}
+
+# schoolclass {{{
+snippet schoolclass
+#!/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# File: `!p snip.rv = fn`
+# Written by: Gus Brocchini
+# Date: `! date +"%d %b %Y"`
+# $1
+
+class $2:
+	def __init__($3):
+		$0
+
+# done.
 endsnippet
 # }}}
 
