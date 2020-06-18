@@ -32,6 +32,11 @@ alias aerl-services="aer-services -s aerl"
 # cleans then runs
 alias rcr="run clean && run"
 
+# md-to-html
+function md2html () {
+    pandoc -o "$(echo "$1" | sed s/md/html/g)" "$1"
+}
+
 # makes 'cs' cd and ll
 function cs () {
     cd "$1" && ll
