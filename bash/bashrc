@@ -10,7 +10,7 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 PS1="\n\[\e[1;35m\]\u\[\e[0;33m\] at \[\e[1;36m\]\h\[\e[0;33m\]:\[\e[0;33m\]\w\[\e[0;37m\]\n \[\e[0;33m\]$ \[\e[0;00m\]"
 
 # alias vim
-if [[ -a $(which nvim) ]]
+if [[ -a $(command -v nvim) ]]
     then
     alias vim="nvim"
 fi
@@ -68,20 +68,6 @@ function cv () {
     fi
 }
 
-# makes task
-function up () {
-    if [[ -d "$1" ]]
-    then
-        cv "$1"
-    elif [[ -d "../$1" ]]
-    then
-        cv "$1"
-    elif [[ -d "../../$1" ]]
-    then
-        cv "$1"
-    fi
-}
-
 # makes gs git status
 alias gs="git status"
 
@@ -103,26 +89,25 @@ function pull () {
 
 # makes makehash make assign-hashids dir
 function makehash {
-    mkdir assign-hashids && cd assign-hashids
-    mkdir src input output
-    cd input
-    ln -s ../../import/output/*.csv.gz
-    cd ../src
-    ln -s ../../../share/setup.py .
-    ln -s ../../../share/assign-hashids.py .
+    task assign-hashids
+    cd src
+    setup_dir="$(dirname "$(find "$(git rev-parse --show-toplevel)" \
+        -name setup.py | grep share)")"
+    setup_dir=$(realpath --relative-to=. "$setup_dir")
+    ln -s "$setup_dir/assign-hashids.py" .
+    cd ..
     vim Makefile
-    run
 }
 
 # inits tasks TODO: should take -nhf for note, hand, frozen
 function task () {
-    mkdir $1 && cd $1
+    mkdir "$1" && cd "$1"
     mkdir src input output
     cd src
-    setup_dir=$(dirname $(find $(git rev-parse --show-toplevel) \
-        -name setup.py | grep share))
-    setup_dir=$(realpath --relative-to=. $setup_dir)
-    ln -s $setup_dir/setup.py .
+    setup_dir="$(dirname "$(find "$(git rev-parse --show-toplevel)" \
+        -name setup.py | grep share)")"
+    setup_dir=$(realpath --relative-to=. "$setup_dir")
+    ln -s "$setup_dir/setup.py" .
 
     # symlink inputs--currently from a menu
     cd ../input/
@@ -142,9 +127,9 @@ function task () {
         esac
     done
     rm "../../QUIT"
-    rm *.log *.yaml
+    rm -- *.log *.yaml ||:
     cd ..
-    tree
+    tree -C
 }
 
 alias featherhead="featherhead.py"
