@@ -2,27 +2,26 @@
 global !p
 def get_script():
 	import operator
-	dir = os.listdir('.')
-	try:
-		dir.remove(fn)
-	except ValueError:
-		pass
+	src_files = ['src/' + file for file in os.listdir('src/')]
 	nm_time = dict()
-	for fi in dir:
+	for src_file in src_files:
 		try:
-			fin = open(fi, 'r').read()
-			if '#!' in fin:
-				fstat = os.stat(fi)
+			file_str = open(src_file, 'r').read()
+			if '#!' in file_str:
+				fstat = os.stat(src_file)
 				ftime = fstat.st_mtime
-				nm_time[fi] = ftime
+				nm_time[src_file] = ftime
 		except:
 			pass
 	script = max(nm_time.items(), key=operator.itemgetter(1))[0]
-	return script
+	return script.replace('src/', '')
 
-inputs = os.listdir('../input/')
+inputs = os.listdir('input/')
 endglobal
 # }}}
+snippet gs_test
+`!p snip.rv = get_script()`
+endsnippet
 
 # m1 {{{
 snippet m1
