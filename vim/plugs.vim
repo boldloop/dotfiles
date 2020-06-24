@@ -1,16 +1,16 @@
 " File for organizing plugins
 " Vim-plug {{{
-filetype off
+" filetype off
 call plug#begin("~/.vim/plugged")
 
 Plug 'SirVer/ultisnips'
 Plug 'w0rp/ale'
-Plug 'itchyny/lightline.vim'
-Plug 'Valloric/YouCompleteMe'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-sneak'
 Plug 'ervandew/supertab'
-Plug 'kien/rainbow_parentheses.vim'
+" Plug 'luochen1990/rainbow'
 " ncm2 {{{
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -25,7 +25,7 @@ Plug 'ncm2/ncm2-ultisnips'
 " }}}
 
 call plug#end()
-filetype plugin indent on
+"filetype plugin indent on
 " }}}
 " Config {{{
 " makes lightline work
@@ -35,21 +35,23 @@ let g:lightline = {
       \ }
 set noshowmode
 
+" airline
+let g:airline_theme = 'sol'
+let g:airline#extensions#ale#enabled = 1
+
 " ale
 let g:ale_linters = {
 \    'python': ['flake8']
 \}
+
+" rainbow
+let g:rainbow_active = 1
 
 " Ultisnips
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
-" YCM
-let g:ycm_server_python_interpreter = systemlist("which python2.7")[0]
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_filepath_completion_use_working_dir = 1
 
 " sneak
 let g:sneak#label = 1
