@@ -6,11 +6,11 @@ call plug#begin("~/.vim/plugged")
 Plug 'SirVer/ultisnips'
 Plug 'w0rp/ale'
 Plug 'itchyny/lightline.vim'
-Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-sneak'
 Plug 'ervandew/supertab'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'wannesm/rmvim.vim'
 " ncm2 {{{
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
