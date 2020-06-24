@@ -8,9 +8,8 @@ Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
-Plug 'justinmk/vim-sneak'
 Plug 'ervandew/supertab'
-" Plug 'luochen1990/rainbow'
+Plug 'wannesm/rmvim.vim'
 " ncm2 {{{
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -52,11 +51,5 @@ let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
-" sneak
-let g:sneak#label = 1
-let g:sneak#streak = 1
-nnoremap s <Plug>SneakLabel_s
-nnoremap S <Plug>SneakLabel_s
 " }}}
 " vim: foldmethod=marker
